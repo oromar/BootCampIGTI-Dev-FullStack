@@ -51,11 +51,7 @@ window.addEventListener('load', () => {
 
   input.addEventListener('keyup', (evt) => {
     let value = evt.target.value
-    if (
-      evt.keyCode == ENTER_KEY_CODE &&
-      evt.target.value &&
-      evt.target.value.trim()
-    ) {
+    if (evt.keyCode == ENTER_KEY_CODE && evt.target.value && evt.target.value.trim()) {
       if (isEditing) {
         list[editIndex] = value
         isEditing = false
