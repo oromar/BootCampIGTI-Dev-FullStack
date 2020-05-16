@@ -24,7 +24,7 @@ window.addEventListener('load', () => {
       input.focus()
     }
     names.innerHTML = ''
-    const listItems = list.map((item, index) => {
+    const listItems = list.map((item) => {
       const p = document.createElement('p')
       p.textContent = item
       p.addEventListener('click', clickName)
@@ -51,7 +51,11 @@ window.addEventListener('load', () => {
 
   input.addEventListener('keyup', (evt) => {
     let value = evt.target.value
-    if (evt.keyCode == ENTER_KEY_CODE && evt.target.value && evt.target.value.trim()) {
+    if (
+      evt.keyCode == ENTER_KEY_CODE &&
+      evt.target.value &&
+      evt.target.value.trim()
+    ) {
       if (isEditing) {
         list[editIndex] = value
         isEditing = false
