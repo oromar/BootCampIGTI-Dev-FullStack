@@ -17,15 +17,15 @@ window.addEventListener('load', async () => {
   const list = document.querySelector('#list')
   const stats = document.querySelector('#stats')
 
-  const renderDefaultData = () => {
+  const renderDefaults = () => {
     list.innerHTML =
       '<div> <h2 class="info-title">Nenhum usuário filtrado</h2></div>'
     stats.innerHTML =
       '<div> <h2 class="info-title">Nada a ser exibido</h2></div>'
   }
 
-  const renderUsers = (filtered) => {
-    const items = filtered
+  const renderPeople = (listToRender) => {
+    const items = listToRender
       .sort((a, b) => a.name.localeCompare(b.name))
       .map(
         (item) =>
@@ -36,15 +36,16 @@ window.addEventListener('load', async () => {
             <p>${item.name}, ${item.age} anos</p>
         </div>`
       )
-    const data = `<div> <h2 class="info-title">${filtered.length} usuário(s) encontrado(s)</h2>`
+    const data = `<div> <h2 class="info-title">${listToRender.length} usuário(s) encontrado(s)</h2>`
     list.innerHTML = data + items.join('') + '</div>'
   }
 
-  const renderStats = (filtered) => {
-    const ages = filtered.reduce((total, current) => total + current.age, 0)
-    const agesMedia = (ages / filtered.length).toFixed(2)
-    const males = filtered.filter((person) => person.gender === 'male').length
-    const females = filtered.length - males
+  const renderStats = (listToRender) => {
+    const ages = listToRender.reduce((total, current) => total + current.age, 0)
+    const agesMedia = (ages / listToRender.length).toFixed(2)
+    const males = listToRender.filter((person) => person.gender === 'male')
+      .length
+    const females = listToRender.length - males
     stats.innerHTML = `
       <div>
         <h2 class="info-title">Estatísticas</h2>
@@ -61,22 +62,22 @@ window.addEventListener('load', async () => {
     list.innerHTML = ''
     stats.innerHTML = ''
     if (value === '') {
-      renderDefaultData()
+      renderDefaults()
       return
     }
-    const filtered = people.filter(
+    const filteredPeople = people.filter(
       (person) => person.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     )
-    if (filtered.length > 0) {
-      renderUsers(filtered)
-      renderStats(filtered)
+    if (filteredPeople.length > 0) {
+      renderPeople(filteredPeople)
+      renderStats(filteredPeople)
     } else {
-      renderDefaultData()
+      renderDefaults()
     }
   }
   input.addEventListener('keyup', (evt) =>
     evt.keyCode == ENTER_KEY ? performSearch(evt.target.value) : null
   )
   searchButton.addEventListener('click', () => performSearch(input.value))
-  renderDefaultData()
+  renderDefaults()
 })
