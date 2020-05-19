@@ -1,0 +1,40 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.search-area {
+  margin: 20px 0px 0px 10px;
+  display: flex;
+}
+.search-area input {
+  margin-right: 10px;
+  width: 537px;
+}
+
+.data-container {
+  display: flex;
+}
+
+.card {
+  border: solid 1px lightgray;
+  min-width: 300px;
+  min-height: 150px;
+  margin: 30px 10px 0px 10px;
+}
+
+.info {
+  display: flex;
+  margin: 5px;
+  padding: 5px;
+}
+
+.image {
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.info-title {
+  font-weight: bold;
+  font-size: 36px;
+  margin: 10px;
+}
