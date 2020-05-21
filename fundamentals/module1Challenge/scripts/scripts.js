@@ -24,11 +24,6 @@ window.addEventListener('load', async () => {
       '<div> <h2 class="info-title">Nada a ser exibido</h2></div>'
   }
 
-  const render = (listToRender) => {
-    renderPeople(listToRender)
-    renderStats(listToRender)
-  }
-
   const renderPeople = (listToRender) => {
     const items = listToRender
       .sort((a, b) => a.name.localeCompare(b.name))
@@ -37,12 +32,17 @@ window.addEventListener('load', async () => {
           `<div class="info">
             <div>
               <img class="image" src="${item.picture}"/>
-            </div>
-            <p>${item.name}, ${item.age} anos</p>
-        </div>`
+              </div>
+              <p>${item.name}, ${item.age} anos</p>
+              </div>`
       )
-    const data = `<div> <h2 class="info-title">${listToRender.length} usuário(s) encontrado(s)</h2>`
-    list.innerHTML = data + items.join('') + '</div>'
+    list.innerHTML = `
+      <div>
+        <h2 class="info-title">
+          ${listToRender.length} usuário(s) encontrado(s)
+        </h2>
+        ${items.join('')}
+      </div>`
   }
 
   const renderStats = (listToRender) => {
@@ -55,17 +55,21 @@ window.addEventListener('load', async () => {
       .length
     const femalesCount = listToRender.length - malesCount
     stats.innerHTML = `
-      <div>
-        <h2 class="info-title">Estatísticas</h2>
-      </div>
-      <div>
-        <p>Sexo masculino: ${malesCount}</p>
-        <p>Sexo feminino: ${femalesCount}</p>
-        <p>Soma das idades: ${totalAges}</p>
-        <p>Média das idades: ${mediaAges}</p>
-      </div>`
+    <div>
+      <h2 class="info-title">Estatísticas</h2>
+    </div>
+    <div>
+      <p>Sexo masculino: ${malesCount}</p>
+      <p>Sexo feminino: ${femalesCount}</p>
+      <p>Soma das idades: ${totalAges}</p>
+      <p>Média das idades: ${mediaAges}</p>
+    </div>`
   }
 
+  const render = (listToRender) => {
+    renderPeople(listToRender)
+    renderStats(listToRender)
+  }
   const performSearch = (value) => {
     list.innerHTML = ''
     stats.innerHTML = ''
