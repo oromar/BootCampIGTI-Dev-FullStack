@@ -24,6 +24,11 @@ window.addEventListener('load', async () => {
       '<div> <h2 class="info-title">Nada a ser exibido</h2></div>'
   }
 
+  const render = (listToRender) => {
+    renderPeople(listToRender)
+    renderStats(listToRender)
+  }
+
   const renderPeople = (listToRender) => {
     const items = listToRender
       .sort((a, b) => a.name.localeCompare(b.name))
@@ -41,20 +46,23 @@ window.addEventListener('load', async () => {
   }
 
   const renderStats = (listToRender) => {
-    const ages = listToRender.reduce((total, current) => total + current.age, 0)
-    const agesMedia = (ages / listToRender.length).toFixed(2)
-    const males = listToRender.filter((person) => person.gender === 'male')
+    const totalAges = listToRender.reduce(
+      (total, current) => total + current.age,
+      0
+    )
+    const mediaAges = (totalAges / listToRender.length).toFixed(2)
+    const malesCount = listToRender.filter((person) => person.gender === 'male')
       .length
-    const females = listToRender.length - males
+    const femalesCount = listToRender.length - malesCount
     stats.innerHTML = `
       <div>
         <h2 class="info-title">Estatísticas</h2>
       </div>
       <div>
-        <p>Sexo masculino: ${males}</p>
-        <p>Sexo feminino: ${females}</p>
-        <p>Soma das idades: ${ages}</p>
-        <p>Média das idades: ${agesMedia}</p>
+        <p>Sexo masculino: ${malesCount}</p>
+        <p>Sexo feminino: ${femalesCount}</p>
+        <p>Soma das idades: ${totalAges}</p>
+        <p>Média das idades: ${mediaAges}</p>
       </div>`
   }
 
@@ -69,15 +77,16 @@ window.addEventListener('load', async () => {
       (person) => person.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     )
     if (filteredPeople.length > 0) {
-      renderPeople(filteredPeople)
-      renderStats(filteredPeople)
+      render(filteredPeople)
     } else {
       renderDefaults()
     }
   }
-  input.addEventListener('keyup', (evt) =>
+  const onInputKeyup = (evt) =>
     evt.keyCode == ENTER_KEY ? performSearch(evt.target.value) : null
-  )
+
+  input.addEventListener('keyup', onInputKeyup)
   searchButton.addEventListener('click', () => performSearch(input.value))
+
   renderDefaults()
 })
