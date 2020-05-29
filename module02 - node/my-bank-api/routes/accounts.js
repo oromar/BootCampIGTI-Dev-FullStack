@@ -43,10 +43,9 @@ accountsRouter.put('/:id', (req, res) => {
   const handler = (err, fileData) => {
     if (err) res.status(500).send(err.message)
     const json = JSON.parse(fileData)
-    const account = json.accounts.find((item) => item.id === +req.params.id)
-    if (account) {
-      json.accounts = json.accounts.filter((item) => item.id !== +req.params.id)
-      json.accounts.push({ ...req.body, id: +req.params.id })
+    const index = json.accounts.findIndex((item) => item.id === +req.params.id)
+    if (index > -1) {
+      json.accounts[index] = { ...req.body, id: +req.params.id }
       fs.writeFile(FILE_NAME, JSON.stringify(json), () => {
         res.statusCode = statusCode.OK
       })
@@ -80,12 +79,10 @@ accountsRouter.post('/withdraw/:id/:amount', (req, res) => {
   const handler = (err, fileData) => {
     if (err) res.status(500).send(err.message)
     const json = JSON.parse(fileData)
-    const account = json.accounts.find((item) => item.id === +req.params.id)
-    if (account) {
-      if (account.balance >= req.params.amount) {
-        const index = json.accounts.indexOf(account)
-        account.balance -= +req.params.amount
-        json.accounts[index] = account
+    const index = json.accounts.findIndex((item) => item.id === +req.params.id)
+    if (index > -1) {
+      if (json.accounts[index].balance >= req.params.amount) {
+        json.accounts[index].balance -= +req.params.amount
         fs.writeFile(FILE_NAME, JSON.stringify(json), () => {
           res.statusCode = statusCode.OK
         })
@@ -108,11 +105,9 @@ accountsRouter.post('/deposit/:id/:amount', (req, res) => {
   const handler = (err, fileData) => {
     if (err) res.status(500).send(err.message)
     const json = JSON.parse(fileData)
-    const account = json.accounts.find((item) => item.id === +req.params.id)
-    if (account) {
-      const index = json.accounts.indexOf(account)
-      account.balance += +req.params.amount
-      json.accounts[index] = account
+    const index = json.accounts.findIndex((item) => item.id === +req.params.id)
+    if (index > -1) {
+      json.accounts[index].balance += +req.params.amount
       fs.writeFile(FILE_NAME, JSON.stringify(json), () => {
         res.statusCode = statusCode.OK
       })
