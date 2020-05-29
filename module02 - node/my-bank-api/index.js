@@ -9,6 +9,6 @@ app.use(express.json())
 app.use('/accounts', accountsRouter)
 app.listen(PORT, () => {
   if (!fs.existsSync(FILE_NAME)) {
-    fs.appendFileSync(FILE_NAME, JSON.stringify({ data: [] }))
+    fs.appendFileSync(FILE_NAME, JSON.stringify({ accounts: [] }))
   }
 })
