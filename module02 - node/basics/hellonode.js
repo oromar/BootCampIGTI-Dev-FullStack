@@ -1,6 +1,6 @@
-const http = require('http')
+import { createServer } from 'http'
 const PORT = 8080
-const server = http.createServer((req, res) => {
+const server = createServer((req, res) => {
   res.statusCode = 200
   res.write('Hello Node!!')
   res.end()

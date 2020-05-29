@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express'
 const PORT = 8080
 const app = express()
 const handler = (req, res) => res.send('Hello Express!!!')
