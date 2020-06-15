@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -16,6 +15,9 @@ function App() {
   const handleClick = () => {
     setItems([...items, new Date().toLocaleString('pt-BR', dateOptions)])
   }
+  useEffect(() => {
+    document.title = items.length
+  })
   return (
     <div>
       <button onClick={handleClick} type="button">

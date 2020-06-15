@@ -13,4 +13,5 @@ button.addEventListener('click', () => {
   const li = document.createElement('li')
   li.textContent = new Date().toLocaleString('pt-BR', dateOptions)
   ul.appendChild(li)
+  document.title = ul.childNodes.length
 })

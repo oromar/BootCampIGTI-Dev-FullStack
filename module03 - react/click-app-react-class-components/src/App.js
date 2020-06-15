@@ -4,6 +4,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = { items: [] }
+    document.title = this.state.items.length
   }
   dateOptions = {
     weekday: 'long',
@@ -14,6 +15,10 @@ class App extends React.Component {
     minute: 'numeric',
     second: 'numeric',
   }
+  componentDidUpdate = () => {
+    document.title = this.state.items.length
+  }
+
   handleClick = () => {
     this.setState({
       items: [

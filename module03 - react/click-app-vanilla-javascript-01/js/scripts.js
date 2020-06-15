@@ -22,6 +22,7 @@ const render = () => {
         )} </li>`
     )
     .join('')
+  document.title = list.length
 }
 
 button.addEventListener('click', () => {

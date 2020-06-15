@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 
 function App() {
@@ -19,6 +18,7 @@ function App() {
     document.querySelector('ul').innerHTML = list
       .map((item) => `<li>${item}</li>`)
       .join('')
+    document.title = list.length
   }
 
   return (
