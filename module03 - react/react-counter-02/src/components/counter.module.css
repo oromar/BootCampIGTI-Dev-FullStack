@@ -1,0 +1,31 @@
+.counter {
+  text-align: center;
+  font-size: 1.8em;
+  padding: 30px;
+}
+
+.decButton {
+  color: white;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  font-weight: bolder;
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.incButton {
+  color: white;
+  background-color: green;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  font-weight: bolder;
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.steps {
+  margin-left: 10px;
+}
