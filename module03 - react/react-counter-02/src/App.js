@@ -2,7 +2,7 @@ import React from 'react'
 import Counter from './components/Counter'
 import './App.css'
 
-function App() {
+const App = () => {
   return (
     <>
       <Counter />

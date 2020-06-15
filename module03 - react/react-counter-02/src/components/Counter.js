@@ -1,4 +1,7 @@
 import React from 'react'
+import Button from './Button'
+import Value from './Value'
+import Steps from './Steps'
 import css from './counter.module.css'
 
 class Counter extends React.Component {
@@ -27,22 +30,10 @@ class Counter extends React.Component {
   render() {
     return (
       <div className={css.counter}>
-        <button
-          className={css.decButton}
-          onClick={this.decrement}
-          type="button"
-        >
-          -
-        </button>
-        <span>{this.state.counter}</span>
-        <button
-          className={css.incButton}
-          onClick={this.increment}
-          type="button"
-        >
-          +
-        </button>
-        <span className={css.steps}>({this.state.steps})</span>
+        <Button label="-" onClick={this.decrement} className={css.decButton} />
+        <Value content={this.state.counter} />
+        <Button label="+" onClick={this.increment} className={css.incButton} />
+        <Steps className={css.steps} steps={this.state.steps} />
       </div>
     )
   }
