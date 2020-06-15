@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.input-filter {
+  margin-right: 10px;
+}
