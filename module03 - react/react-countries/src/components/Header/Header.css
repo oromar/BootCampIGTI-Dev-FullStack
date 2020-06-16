@@ -10,3 +10,7 @@
 .input-filter {
   margin-right: 10px;
 }
+
+.emphasis-value {
+  font-weight: bolder;
+}

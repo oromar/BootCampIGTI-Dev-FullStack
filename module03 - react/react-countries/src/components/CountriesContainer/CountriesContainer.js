@@ -9,8 +9,6 @@ export default class CountriesContainer extends Component {
     this.state = {
       countries: [],
       filteredCountries: [],
-      quantity: 0,
-      population: '0',
     }
   }
 
@@ -20,48 +18,43 @@ export default class CountriesContainer extends Component {
     const mapped = data.map(({ name, numericCode, flag, population }) => ({
       name,
       numericCode,
+      filterName: name.toLowerCase(),
       flag,
       population,
     }))
-    const population = mapped.reduce(
-      (total, current) => total + current.population,
-      0
-    )
-    const quantity = mapped.length
     this.setState({
       countries: mapped,
       filteredCountries: mapped,
-      population: population.toLocaleString('pt-BR'),
-      quantity,
     })
+  }
+
+  getPopulation = () => {
+    const value = this.state.filteredCountries.reduce(
+      (total, current) => total + current.population,
+      0
+    )
+    return value.toLocaleString('pt-BR')
   }
 
   handleKeyUp = (evt) => {
     const { value } = evt.target
-    const filteredCountries = !value
-      ? this.state.countries
-      : this.state.countries.filter(
-          (a) => a.name.toLowerCase().indexOf(value.toLowerCase()) > -1
-        )
-    const population = filteredCountries.reduce(
-      (total, current) => total + current.population,
-      0
+    const filter = value?.toLowerCase() ?? ''
+    const filteredCountries = this.state.countries.filter((country) =>
+      country.filterName.includes(filter)
     )
-    const quantity = filteredCountries.length
     this.setState({
       filteredCountries,
-      population: population.toLocaleString('pt-BR'),
-      quantity,
     })
   }
 
   render() {
-    const { filteredCountries, quantity, population } = this.state
+    const { filteredCountries } = this.state
+    const population = this.getPopulation()
     return (
       <>
         <Header
           onKeyUp={this.handleKeyUp}
-          quantity={quantity}
+          quantity={filteredCountries.length}
           population={population}
         />
         <h1 className="title">Países</h1>
