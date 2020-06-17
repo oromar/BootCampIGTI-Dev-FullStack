@@ -2,16 +2,17 @@ import React from 'react'
 import _ from 'lodash'
 import css from './Grades.module.css'
 
-export default function Grade({ grades, onDelete, onUpdate }) {
+export default function Grade({ grades, onUpdate }) {
   const grouped = _.groupBy(grades, 'subject')
   const subjects = Object.keys(grouped)
   const classes = `${css.gradeTable} striped`
 
-  const handleDelete = (id) => {
-    onDelete(id)
+  const handleUpdate = (grade) => {
+    const newValue = prompt('Insira novo valor')
+    if (newValue) onUpdate({ ...grade, value: +newValue })
   }
 
-  const handleUpdate = (grade) => {
+  const handleDelete = (grade) => {
     onUpdate(grade)
   }
 
@@ -39,17 +40,21 @@ export default function Grade({ grades, onDelete, onUpdate }) {
                     <td>{student}</td>
                     <td>{subject}</td>
                     <td>{type}</td>
-                    <td>{value}</td>
+                    <td>{value || '-'}</td>
                     <td>
-                      <a className={css.link} href="#">
+                      <a
+                        onClick={() => handleUpdate(grade)}
+                        className={css.link}
+                        href="javascript:void()"
+                      >
                         <i className="material-icons">edit</i>
                       </a>
                     </td>
                     <td>
                       <a
                         className={css.link}
-                        href="#"
-                        onClick={() => handleDelete(grade.id)}
+                        href="javascript:void()"
+                        onClick={() => handleDelete({ ...grade, value: null })}
                       >
                         <i className="material-icons">delete</i>
                       </a>

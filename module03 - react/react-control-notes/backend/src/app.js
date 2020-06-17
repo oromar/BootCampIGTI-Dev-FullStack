@@ -1,27 +1,27 @@
-import express from 'express';
-import cors from 'cors';
-import fs from 'fs';
-import { promisify } from 'util';
-import winston from 'winston';
-import gradesRouter from './routes/grades.js';
-import { postGrade } from './routes/grades.js';
+import express from 'express'
+import cors from 'cors'
+import fs from 'fs'
+import { promisify } from 'util'
+import winston from 'winston'
+import gradesRouter from './routes/grades.js'
+import { postGrade } from './routes/grades.js'
 
-const app = express();
-app.use(cors());
-const exists = promisify(fs.exists);
-const writeFile = promisify(fs.writeFile);
-const deleteFile = promisify(fs.unlink);
+const app = express()
+app.use(cors())
+const exists = promisify(fs.exists)
+const writeFile = promisify(fs.writeFile)
+const deleteFile = promisify(fs.unlink)
 
-const { combine, timestamp, label, printf } = winston.format;
+const { combine, timestamp, label, printf } = winston.format
 const myFormat = printf(({ level, message, label, timestamp }) => {
-  return `${timestamp} [${label}] ${level}: ${message}`;
-});
-global.fileName = 'grades.json';
+  return `${timestamp} [${label}] ${level}: ${message}`
+})
+global.fileName = 'grades.json'
 
-app.use(express.json());
-app.use(express.static('public'));
-app.use('/images', express.static('public'));
-app.use('/grade', gradesRouter);
+app.use(express.json())
+app.use(express.static('public'))
+app.use('/images', express.static('public'))
+app.use('/grade', gradesRouter)
 
 /**
  * Função para simular algumas
@@ -29,37 +29,37 @@ app.use('/grade', gradesRouter);
  * na API
  */
 function simulateGrades() {
-  const students = ['John Petrucci', 'Mike Portnoy', 'Neal Morse'];
-  const subjects = ['01 - JavaScript', '02 - Node', '03 - React'];
-  const types = ['Exercícios', 'Trabalho Prático', 'Desafio'];
-  const maxGrades = [10, 40, 50];
+  const students = ['John Petrucci', 'Mike Portnoy', 'Neal Morse']
+  const subjects = ['01 - JavaScript', '02 - Node', '03 - React']
+  const types = ['Exercícios', 'Trabalho Prático', 'Desafio']
+  const maxGrades = [10, 40, 50]
 
-  const grades = [];
+  const grades = []
 
   students.forEach((student) => {
     types.forEach((type, index) => {
       subjects.forEach((subject) => {
-        const value = Math.ceil(Math.random() * maxGrades[index]);
+        const value = Math.ceil(Math.random() * maxGrades[index])
 
         const grade = {
           student,
           subject,
           type,
           value,
-        };
+        }
 
-        grades.push(grade);
-      });
-    });
-  });
+        grades.push(grade)
+      })
+    })
+  })
 
   const postAllGrades = async () => {
     for (let i = 0; i < grades.length; i++) {
-      await postGrade(grades[i]);
+      await postGrade(grades[i])
     }
-  };
+  }
 
-  postAllGrades();
+  postAllGrades()
 }
 
 global.logger = winston.createLogger({
@@ -73,7 +73,7 @@ global.logger = winston.createLogger({
     timestamp(),
     myFormat
   ),
-});
+})
 
 app.listen(3001, async () => {
   /**
@@ -81,21 +81,21 @@ app.listen(3001, async () => {
    * simulados. Comente a linha abaixo
    * se quiser preservar os dados
    */
-  await deleteFile(global.fileName);
+  await deleteFile(global.fileName)
 
   try {
-    const fileExists = await exists(global.fileName);
+    const fileExists = await exists(global.fileName)
     if (!fileExists) {
       const initialJson = {
         nextId: 1,
         grades: [],
-      };
-      await writeFile(global.fileName, JSON.stringify(initialJson));
+      }
+      await writeFile(global.fileName, JSON.stringify(initialJson))
 
-      simulateGrades();
+      simulateGrades()
     }
   } catch (err) {
-    logger.error(err);
+    logger.error(err)
   }
-  logger.info('API started!');
-});
+  logger.info('API started!')
+})
