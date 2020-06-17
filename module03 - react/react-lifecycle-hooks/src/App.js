@@ -1,46 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Users from './components/Users'
 import './App.css'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      users: [],
-      showUsers: false,
+function App () {
+  const[users, setUsers] = useState([])
+  const[showUsers, setShowUsers] = useState(false)
+
+  const toggleShowUsers = () => {
+    setShowUsers(!showUsers)
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const resp = await fetch(
+        'https://randomuser.me/api/?seed=rush&nat=r&results=10'
+      )
+      const data = await resp.json()
+      setUsers(data.results)
     }
-  }
+    fetchData()
+  } , [])
 
-  handleShowUsers = () => {
-    this.setState({
-      showUsers: !this.state.showUsers,
-      users: [...this.state.users],
-    })
-  }
-
-  async componentDidMount() {
-    const resp = await fetch(
-      'https://randomuser.me/api/?seed=rush&nat=r&results=10'
-    )
-    const data = await resp.json()
-    this.setState({
-      users: [...data.results],
-    })
-  }
-  componentDidUpdate() {
-    console.log('ComponentDidUpdate from App.js')
-  }
-  componentWillUnmount() {
-    console.log('ComponentWillUnmount from App.js')
-  }
-
-  render() {
-    const { showUsers, users } = this.state
     return (
       <div className="App">
         <label>
           <input
-            onChange={this.handleShowUsers}
+            onChange={toggleShowUsers}
             checked={showUsers}
             type="checkbox"
           />
@@ -49,7 +34,6 @@ class App extends React.Component {
         {showUsers && <Users users={users} />}
       </div>
     )
-  }
 }
 
 export default App

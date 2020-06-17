@@ -1,19 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 
-export default class Band extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      bandName: 'Rush',
-      bandMembers: [
-        { id: 1, name: 'Neil Peart', instrument: 'Bateria' },
-        { id: 2, name: 'Alex Lifeson', instrument: 'Guitarra' },
-        { id: 3, name: 'Geddy Lee', instrument: 'Baixo' },
-      ],
-    }
-  }
-  render() {
-    const { bandName, bandMembers } = this.state
+const BAND_MEMBERS = [
+  { id: 1, name: 'Neil Peart', instrument: 'Bateria' },
+  { id: 2, name: 'Alex Lifeson', instrument: 'Guitarra' },
+  { id: 3, name: 'Geddy Lee', instrument: 'Baixo' },
+]
+export default function Band() {
+  const [bandName, setBandName] = useState('Rush')
+  const [bandMembers, setBandMembers] = useState(BAND_MEMBERS)
     return (
       <div>
         <h3>{bandName}</h3>
@@ -28,5 +22,4 @@ export default class Band extends Component {
         </ul>
       </div>
     )
-  }
 }
