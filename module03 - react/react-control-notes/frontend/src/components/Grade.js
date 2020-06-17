@@ -28,8 +28,8 @@ export default function Grade({ grades, onUpdate }) {
                 <th>Disciplina</th>
                 <th>Avaliação</th>
                 <th>Nota</th>
-                <th>Editar</th>
-                <th>Remover</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -47,17 +47,23 @@ export default function Grade({ grades, onUpdate }) {
                         className={css.link}
                         href="javascript:void()"
                       >
-                        <i className="material-icons">edit</i>
+                        <i className="material-icons">
+                          {grade.value ? 'edit' : 'add'}
+                        </i>
                       </a>
                     </td>
                     <td>
-                      <a
-                        className={css.link}
-                        href="javascript:void()"
-                        onClick={() => handleDelete({ ...grade, value: null })}
-                      >
-                        <i className="material-icons">delete</i>
-                      </a>
+                      {grade.value && (
+                        <a
+                          className={css.link}
+                          href="javascript:void()"
+                          onClick={() =>
+                            handleDelete({ ...grade, value: null })
+                          }
+                        >
+                          <i className="material-icons">delete</i>
+                        </a>
+                      )}
                     </td>
                   </tr>
                 )
