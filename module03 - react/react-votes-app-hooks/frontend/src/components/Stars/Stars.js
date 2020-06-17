@@ -1,20 +1,21 @@
 import React from 'react'
 import './Stars.css'
 
+const STARS = {
+  full: '★',
+  empty: '☆',
+}
+const MAX_STARS = 10
+
 export default function Stars(props) {
-    const {popularity} = props
-    return (
-        <div className="stars">
-            <i className={`star far fa fa-star ${popularity >= 1 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 2 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 3 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 4 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 5 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 6 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 7 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 8 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity >= 9 ? 'checked' : ''}`}></i>
-            <i className={`star far fa fa-star ${popularity == 10 ? 'checked' : ''}`}></i>
-        </div>
-    )
+  const { popularity } = props
+  const full = STARS.full.repeat(popularity)
+  const empty = STARS.empty.repeat(MAX_STARS - popularity)
+
+  return (
+    <div className="stars">
+      {full}
+      {empty}
+    </div>
+  )
 }

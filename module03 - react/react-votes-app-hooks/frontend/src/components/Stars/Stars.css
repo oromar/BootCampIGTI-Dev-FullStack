@@ -1,7 +1,4 @@
-.star {
-    color: white;
-}
-
-.checked {
-    color: orange;
+.stars {
+  color: gold;
+  font-size: 1.5rem;
 }
