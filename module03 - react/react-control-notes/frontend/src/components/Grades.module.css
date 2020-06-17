@@ -1,0 +1,19 @@
+.gradeTable {
+  width: 700px;
+  border: 1px solid lightgray;
+  margin: 10px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.link {
+  color: black;
+}
+
+.total {
+  font-weight: bolder;
+}
