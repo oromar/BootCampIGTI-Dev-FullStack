@@ -1,0 +1,24 @@
+.country-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  padding: 50px;
+  border: solid 1px black;
+  height: auto;
+  border-radius: 20px;
+  margin: 30px;
+  width: 250px;
+}
+
+.country-card > img {
+  border-radius: 50px;
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+}
+
+.country-name {
+  font-size: 1.8em;
+  font-weight: bold;
+}
