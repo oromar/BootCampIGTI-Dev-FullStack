@@ -23,7 +23,6 @@ const GENERAL_VALIDATORS = [
 
 const GRADE_VALIDATORS = [
   {
-    id: 1,
     type: 'Exercícios',
     functions: [
       {
@@ -33,7 +32,6 @@ const GRADE_VALIDATORS = [
     ],
   },
   {
-    id: 2,
     type: 'Trabalho Prático',
     functions: [
       {
@@ -43,7 +41,6 @@ const GRADE_VALIDATORS = [
     ],
   },
   {
-    id: 3,
     type: 'Desafio',
     functions: [
       {
