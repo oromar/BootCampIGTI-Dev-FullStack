@@ -1,0 +1,26 @@
+.parcel-container {
+  padding-left: 10px;
+  display: flex;
+  width: 150px;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid gray;
+  height: 75px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.parcel-data-container {
+  font-size: 0.8rem;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.parcel-data-container p {
+  padding: 0px;
+  margin: 2px;
+}

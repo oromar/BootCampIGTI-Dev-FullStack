@@ -1,0 +1,8 @@
+.parcels-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 30px;
+  margin: 0px;
+}
