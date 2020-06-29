@@ -3,7 +3,7 @@ import './Form.css'
 import Input from './Input'
 import Installments from './Installments'
 
-export default function Form() {
+const Form = () => {
   const [input, setInput] = useState(100)
   const [tax, setTax] = useState(0)
   const [period, setPeriod] = useState(0)
@@ -69,3 +69,4 @@ export default function Form() {
     </>
   )
 }
+export default Form
