@@ -2,8 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { accounts } = require('./routes/accounts')
 
-const URI =
-  'mongodb+srv://igti:igti123@bootcampigti-rlfq8.mongodb.net/bank?retryWrites=true&w=majority'
+const URI = ''
 mongoose.connect(URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
