@@ -2,7 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { accounts } = require('./routes/accounts')
 
-const URI = ''
+const URI =
+  ''
 mongoose.connect(URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

@@ -13,7 +13,15 @@ const input6 = [
 ]
 const input7 = ['Maria 5', 'Pedro 2', 'Joao 5', 'Isabel 2', 'Luana 8']
 
-const allItems = [input1, input2, input3, input4, input5, input6, input7]
+const allItems = [
+  input1,
+  input2,
+  input3,
+  input4,
+  input5,
+  input6,
+  //    input7
+]
 
 allItems.forEach((x) => {
   const input = []
@@ -26,19 +34,17 @@ allItems.forEach((x) => {
   // }
 
   let number = input[0].value
-  let pos = number % 2 == 0 ? 0 : 1
-  while (input.length > 1) {
+  let pos = 1
+  while (true) {
     const h = number % 2 === 0
     const n = input.length
-
-    if (h)
-      for (let i = 0; i < number; i++) current = input[((--pos % n) + n) % n]
-    else
-      for (let i = 0; i < number; i++) current = input[(pos + (i % n) + n) % n]
-
+    for (let i = 0; i < number; i++) {
+      current = input[(((pos + i) % n) + n) % n]
+    }
     number = current.value
     pos = input.indexOf(current)
     input.splice(pos, 1)
+    if (input.length === 1) break
   }
   console.log(`Vencedor(a): ${input[0].name}`)
 })

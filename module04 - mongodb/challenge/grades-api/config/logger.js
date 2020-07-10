@@ -14,7 +14,8 @@ const logger = createLogger({
     new transports.Console(),
     new transports.MongoDB({
       level: 'info',
-      db: process.env.MONGODB,
+      db:
+        process.env.MONGODB,
       collection: 'logs_grades',
       capped: true,
       cappedMax: 20,

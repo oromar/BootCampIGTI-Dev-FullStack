@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 const db = {}
 db.mongoose = mongoose
-db.url = process.env.MONGODB
+db.url =
+  process.env.MONGODB 
 
 const schema = new mongoose.Schema({
   name: { type: String, required: true },
